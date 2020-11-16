@@ -19,8 +19,6 @@ public class ConsoleProgress implements Runnable {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                if (Thread.currentThread().isInterrupted()) continue;
-                logger.log(Level.SEVERE, "Exception: ", e);
             }
         }
     }
