@@ -9,23 +9,17 @@ public class ThreadState {
                 () -> System.out.println(Thread.currentThread().getName())
         );
         System.out.println(first.getState());
-
+        System.out.println(second.getState());
         first.start();
         second.start();
         System.out.println(Thread.currentThread().getName());
-
-        while (first.getState() != Thread.State.TERMINATED) {
-            System.out.println(first.getState());
+        while ((first.getState() != Thread.State.TERMINATED) && (second.getState() != Thread.State.TERMINATED)) {
+            System.out.println(first.getName() + ": " + first.getState() + " - "
+                    + second.getName() + ": " + second.getState());
         }
-        System.out.println(first.getState());
+        System.out.println(first.getName() + ": " + first.getState() + " - "
+                + second.getName() + ": " + second.getState());
 
-        try {
-            first.join();
-            second.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         System.out.println("Работа завершена");
-
     }
 }
