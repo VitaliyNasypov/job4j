@@ -8,8 +8,8 @@ public class Count {
     @GuardedBy("this")
     private int value;
 
-    public synchronized void increment() {
-        this.value++;
+    public synchronized int increment() {
+        return ++value;
     }
 
     public synchronized int get() {
