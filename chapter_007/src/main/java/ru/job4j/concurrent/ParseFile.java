@@ -3,40 +3,49 @@ package ru.job4j.concurrent;
 import java.io.*;
 
 public class ParseFile {
-    private File file;
+    final private File file;
 
-    public synchronized void setFile(File f) {
-        file = f;
+    public ParseFile(File file) {
+        this.file = file;
     }
 
-    public synchronized File getFile() {
+    public File getFile() {
         return file;
     }
 
-    public synchronized String getContent() throws IOException {
-        InputStream i = new FileInputStream(file);
+    public String getContent() {
         StringBuilder output = new StringBuilder();
-        int data;
-        while ((data = i.read()) > 0) {
-            output.append((char) data);
-        }
-        return output.toString();
-    }
-
-    public synchronized String getContentWithoutUnicode() throws IOException {
-        InputStream i = new FileInputStream(file);
-        StringBuilder output = new StringBuilder();
-        int data;
-        while ((data = i.read()) > 0) {
-            if (data < 0x80) {
+        try (InputStream i = new FileInputStream(file)) {
+            int data;
+            while ((data = i.read()) > 0) {
                 output.append((char) data);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return output.toString();
     }
 
-    public synchronized void saveContent(String content) throws IOException {
-        OutputStream o = new FileOutputStream(file);
-        o.write(content.getBytes());
+    public String getContentWithoutUnicode() {
+        StringBuilder output = new StringBuilder();
+        try (InputStream i = new FileInputStream(file)) {
+            int data;
+            while ((data = i.read()) > 0) {
+                if (data < 0x80) {
+                    output.append((char) data);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return output.toString();
+    }
+
+    public void saveContent(String content) {
+        try (OutputStream o = new FileOutputStream(file)) {
+            o.write(content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
