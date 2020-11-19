@@ -16,12 +16,4 @@ public class Node<T> {
     public T getValue() {
         return value;
     }
-
-//    public void setNext(Node next) {
-//        this.next = next;
-//    }
-//
-//    public void setValue(T value) {
-//        this.value = value;
-//    }
 }
