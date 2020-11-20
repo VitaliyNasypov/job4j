@@ -6,32 +6,32 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserCache {
-    private final ConcurrentHashMap<Integer, User> users = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, UserName> users = new ConcurrentHashMap<>();
     private final AtomicInteger id = new AtomicInteger();
 
-    public void add(User user) {
-        users.put(id.incrementAndGet(), User.of(user.getName()));
+    public void add(UserName userName) {
+        users.put(id.incrementAndGet(), UserName.of(userName.getName()));
     }
 
-    public User findById(int id) {
-        return User.of(users.get(id).getName());
+    public UserName findById(int id) {
+        return UserName.of(users.get(id).getName());
     }
 
-    public List<User> findAll() {
-        ArrayList<User> copyUsers = new ArrayList<>();
-        users.forEach((key, value) -> copyUsers.add(User.of(value.getName())));
-        return copyUsers;
+    public List<UserName> findAll() {
+        ArrayList<UserName> copyUserNames = new ArrayList<>();
+        users.forEach((key, value) -> copyUserNames.add(UserName.of(value.getName())));
+        return copyUserNames;
     }
 }
 
-class User {
+class UserName {
     private int id;
     private String name;
 
-    public static User of(String name) {
-        User user = new User();
-        user.name = name;
-        return user;
+    public static UserName of(String name) {
+        UserName userName = new UserName();
+        userName.name = name;
+        return userName;
     }
 
     public int getId() {
