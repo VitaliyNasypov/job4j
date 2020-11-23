@@ -3,8 +3,8 @@ package ru.job4j.concurrent;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 public class SimpleBlockingQueueTest {
@@ -12,29 +12,41 @@ public class SimpleBlockingQueueTest {
 
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
-        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
-        final List<Integer> delivery = new ArrayList<>();
+        final SimpleBlockingQueue<Integer> pendingTasks = new SimpleBlockingQueue<>(5);
+        Queue<Integer> newTasks = new LinkedList<>();
+        for (int i = 0; i < 7; i++) {
+            newTasks.offer(i);
+        }
+        Queue<Integer> completedTasks = new LinkedList<>();
         Thread producer = new Thread(
                 () -> {
-                    for (int i = 0; i < 7; i++) {
-                        queue.offer(i);
+                    try {
+                        while (!(newTasks.size() == 0)) {
+                            pendingTasks.offer(newTasks.poll());
+                        }
+                    } catch (InterruptedException e) {
+                        LOGGER.severe(e.getMessage());
                     }
                 }
         );
         producer.start();
         Thread consumer = new Thread(
                 () -> {
-                    while (delivery.size() != 7) {
-                        try {
-                            delivery.add(queue.poll());
-                        } catch (InterruptedException e) {
-                            LOGGER.severe(e.getMessage());
+                    try {
+                        while (!Thread.currentThread().isInterrupted()) {
+                            completedTasks.add(pendingTasks.poll());
                         }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        LOGGER.severe(e.getMessage());
                     }
                 }
         );
         consumer.start();
-        consumer.join();
-        Assertions.assertEquals(7,delivery.size());
+        producer.join();
+        consumer.interrupt();
+        Assertions.assertEquals(0, newTasks.size());
+        Assertions.assertEquals(0, pendingTasks.getSize());
+        Assertions.assertEquals(7, completedTasks.size());
     }
 }

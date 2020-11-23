@@ -12,42 +12,31 @@ public class SimpleBlockingQueue<T> {
     private static final Logger LOGGER = Logger.getLogger(Wget.class.getName());
     @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
-    private final int limitQueue;
+    private final int limit;
 
     public SimpleBlockingQueue() {
-        limitQueue = 5;
+        limit = 5;
     }
 
-    public SimpleBlockingQueue(int limitQueue) {
-        this.limitQueue = limitQueue;
+    public SimpleBlockingQueue(int limit) {
+        this.limit = limit;
     }
 
-    public void offer(T value) {
-        while (true) {
-            synchronized (this) {
-                while (queue.size() == limitQueue) {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        LOGGER.severe(e.getMessage());
-                    }
-                }
-                queue.offer(value);
-                this.notify();
-            }
+    public synchronized void offer(T value) throws InterruptedException {
+        while (queue.size() == limit) {
+            wait();
         }
+        queue.offer(value);
+        notify();
     }
 
-    public T poll() throws InterruptedException {
-        while (true) {
-            synchronized (this) {
-                while (queue.size() == 0) {
-                    this.wait();
-                }
-                this.notify();
-                return queue.poll();
-            }
+    public synchronized T poll() throws InterruptedException {
+        while (queue.size() == 0) {
+            wait();
         }
+        T result = queue.poll();
+        notify();
+        return result;
     }
 
     public synchronized int getSize() {
