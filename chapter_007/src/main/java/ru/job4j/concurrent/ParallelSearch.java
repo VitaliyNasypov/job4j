@@ -10,7 +10,7 @@ public class ParallelSearch {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
         final Thread consumer = new Thread(
                 () -> {
-                    while (!Thread.currentThread().isInterrupted() || !(queue.isEmpty())) {
+                    while (!Thread.currentThread().isInterrupted() || !queue.isEmpty()) {
                         try {
                             System.out.println(queue.poll());
                         } catch (InterruptedException e) {
