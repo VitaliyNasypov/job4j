@@ -1,51 +1,43 @@
 package ru.job4j.concurrent;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class SimpleBlockingQueueTest {
-    private static final Logger LOGGER = Logger.getLogger(SimpleBlockingQueueTest.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleBlockingQueueTest.class.getName());
 
-    private static Stream<Integer> countTask() {
-        return Stream.of(1, 15, 30, 23, 56, 4, 78, 156, 234, 3, 2);
-    }
-
-    @ParameterizedTest
-    @MethodSource("countTask")
-    public void whenFetchAllThenGetIt(Integer count) throws InterruptedException {
-        final SimpleBlockingQueue<Integer> pendingTasks = new SimpleBlockingQueue<>(5);
-        Queue<Integer> newTasks = new LinkedList<>();
-        for (int i = 0; i < count; i++) {
-            newTasks.offer(i);
-        }
-        Queue<Integer> completedTasks = new LinkedList<>();
+    @Test
+    public void whenFetchAllThenGetIt() throws InterruptedException {
+        final List<Integer> buffer = new ArrayList<>();
+        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
         Thread producer = new Thread(
                 () -> {
-                    try {
-                        while (!newTasks.isEmpty()) {
-                            pendingTasks.offer(newTasks.poll());
+                    for (int i = 0; i < 8; i++) {
+                        try {
+                            queue.offer(i);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (InterruptedException e) {
-                        LOGGER.severe(e.getMessage());
                     }
                 }
         );
         producer.start();
         Thread consumer = new Thread(
                 () -> {
-                    try {
-                        while (!pendingTasks.isEmpty() || !Thread.currentThread().isInterrupted()) {
-                            completedTasks.add(pendingTasks.poll());
+                    while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+                        try {
+                            buffer.add(queue.poll());
+                        } catch (InterruptedException e) {
+                            LOGGER.warn(e.getMessage(), e);
+                            Thread.currentThread().interrupt();
                         }
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        LOGGER.severe(e.getMessage());
                     }
                 }
         );
@@ -53,8 +45,6 @@ public class SimpleBlockingQueueTest {
         producer.join();
         consumer.interrupt();
         consumer.join();
-        Assertions.assertTrue(newTasks.isEmpty());
-        Assertions.assertTrue(pendingTasks.isEmpty());
-        Assertions.assertEquals(count, completedTasks.size());
+        Assertions.assertIterableEquals(buffer, Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7));
     }
 }
