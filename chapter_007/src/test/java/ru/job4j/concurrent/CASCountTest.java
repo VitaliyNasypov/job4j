@@ -16,7 +16,7 @@ public class CASCountTest {
 
     @ParameterizedTest
     @MethodSource("number")
-    public void whenFetchAllThenGetIt(Integer count) {
+    public void shouldMakeTwoThreadIncrement(Integer count) {
         CASСount countTest = new CASСount(0);
         Thread first = new Thread(
                 () -> {
