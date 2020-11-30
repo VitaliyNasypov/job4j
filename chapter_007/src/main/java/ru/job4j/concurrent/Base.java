@@ -68,11 +68,7 @@ class CacheBase {
     private final ConcurrentHashMap<Integer, Base> cacheBase = new ConcurrentHashMap<>();
 
     public boolean add(Base model) {
-        if (cacheBase.containsKey(model.getId())) {
-            return false;
-        }
-        cacheBase.put(model.getId(), model);
-        return true;
+        return cacheBase.putIfAbsent(model.getId(), model) == null;
     }
 
     public boolean update(Base model) {
@@ -85,9 +81,8 @@ class CacheBase {
         );
         if (cacheBase.get(model.getId()).equals(model)) {
             return true;
-        } else {
-            throw new OptimisticException("Wrong version");
         }
+        throw new OptimisticException("Wrong version");
     }
 
     public boolean delete(Base model) {
