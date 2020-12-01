@@ -10,7 +10,7 @@ public class ThreadPool extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(ThreadPool.class);
     private final List<Thread> threads;
     private final SimpleBlockingQueue<Runnable> tasks;
-    private boolean isRunnable;
+    private volatile boolean isRunnable;
 
     public ThreadPool() {
         threads = new LinkedList<>();
