@@ -3,9 +3,8 @@ package ru.job4j.concurrent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 public class CountTest {
-    private class ThreadCount extends Thread {
+    private static class ThreadCount extends Thread {
         private final Count count;
 
         private ThreadCount(final Count count) {
@@ -27,6 +26,6 @@ public class CountTest {
         second.start();
         first.join();
         second.join();
-        Assertions.assertEquals(2,count.get());
+        Assertions.assertEquals(2, count.get());
     }
 }

@@ -39,6 +39,7 @@ public class ThreadPool extends Thread {
     @Override
     public void run() {
         while (threads.stream().anyMatch(Thread::isAlive)) {
+            threads.isEmpty();
         }
     }
 

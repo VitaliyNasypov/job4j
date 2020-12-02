@@ -19,15 +19,16 @@ public class WgetTest {
     public void shouldRequestNoCorrect() {
         String url = "test://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
         String speedLimit = "aaa";
-        Wget.main(new String[]{url,speedLimit});
+        Wget.main(new String[]{url, speedLimit});
         File file = new File("fileTemp.xml");
         Assertions.assertFalse(file.exists());
     }
+
     @Test
     public void shouldRequestCorrect() {
         String url = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
         String speedLimit = "200";
-        Wget.main(new String[]{url,speedLimit});
+        Wget.main(new String[]{url, speedLimit});
         File file = new File("fileTemp.xml");
         Assertions.assertTrue(file.exists());
         file.delete();
@@ -39,7 +40,9 @@ class DownloaderTest {
 
     private static Stream<Callable<String>> correctUrl() {
         return Stream.of(
-                new Downloader("https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml",
+                new Downloader(
+                        "https://raw.githubusercontent.com/peterarsentev/"
+                                + "course_test/master/pom.xml",
                         200));
     }
 
@@ -67,7 +70,8 @@ class DownloaderTest {
 
     @ParameterizedTest
     @MethodSource("correctUrl")
-    public void fileShouldUploaded(Downloader downloader) throws ExecutionException, InterruptedException {
+    public void fileShouldUploaded(Downloader downloader)
+            throws ExecutionException, InterruptedException {
         FutureTask<String> future = new FutureTask<>(downloader);
         new Thread(future).start();
         String result = future.get();
@@ -76,5 +80,4 @@ class DownloaderTest {
         Assertions.assertTrue(file.exists());
         file.delete();
     }
-
 }

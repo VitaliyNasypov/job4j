@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConsoleProgress implements Runnable {
-    private static final Logger logger = Logger.getLogger(Wget.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Wget.class.getName());
 
     @Override
     public void run() {
@@ -29,7 +29,7 @@ public class ConsoleProgress implements Runnable {
         try {
             Thread.sleep(1000); /* симулируем выполнение параллельной задачи в течение 1 секунды. */
         } catch (InterruptedException e) {
-            logger.log(Level.SEVERE, "Exception: ", e);
+            LOGGER.log(Level.SEVERE, "Exception: ", e);
         }
         progress.interrupt();
     }

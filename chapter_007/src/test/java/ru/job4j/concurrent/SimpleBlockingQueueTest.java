@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class SimpleBlockingQueueTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleBlockingQueueTest.class.getName());
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(SimpleBlockingQueueTest.class.getName());
 
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
