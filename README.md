@@ -3,4 +3,4 @@
 [![codecov](https://codecov.io/gh/VitaliyNasypov/job4j/branch/master/graph/badge.svg?token=RVLU28UZYU)](https://codecov.io/gh/VitaliyNasypov/job4j)
 
 <br><br>
-3.3. Объединение нескольких коммитов №1
+3.3. Объединение нескольких коммитов №2
