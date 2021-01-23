@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class HibernateRun {
@@ -19,12 +20,17 @@ public class HibernateRun {
                 .configure().build();
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            Item item = create(new Item("Learn Hibernate"), sf);
-            System.out.println(item);
-            item.setName("Learn Hibernate 5.");
-            update(item, sf);
-            System.out.println(item);
-            Item rsl = findById(item.getId(), sf);
+            Item item1 = create(new Item("Learn Hibernate", "Description",
+                    new Timestamp(1459510232000L)), sf);
+            create(new Item("Learn Hibernate 2", "Description 2",
+                    new Timestamp(14595102234200L)), sf);
+            create(new Item("Learn Hibernate 3", "Description 3",
+                    new Timestamp(1459510243242000L)), sf);
+            System.out.println(item1);
+            item1.setName("Learn Hibernate 5.");
+            update(item1, sf);
+            System.out.println(item1);
+            Item rsl = findById(item1.getId(), sf);
             System.out.println(rsl);
             delete(rsl.getId(), sf);
             List<Item> list = findAll(sf);
