@@ -1,11 +1,20 @@
 # Travis CI будет использовать язык java.
 language: java
+install: true
 
 # Версия JDK для сборки проекта
 jdk: oraclejdk11
 
-# Режим обычного пользователя для сборки проекта.
-sudo: false
+services:
+  - postgresql
+
+os:
+  - linux
+
+dist: xenial
+
+before_install:
+  - psql -c 'create database tracker;' -U postgres
 
 # После выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # И отправлять на сервис https://codecov.io/
