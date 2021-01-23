@@ -117,6 +117,7 @@
 
     <modules>
         <module>chapter_007</module>
+        <module>job4j_tracker</module>
     </modules>
 
 </project>
