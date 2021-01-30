@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.service;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.tracker.model.Item;
 
 import javax.persistence.Query;
 import java.util.List;

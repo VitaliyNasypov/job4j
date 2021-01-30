@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.job4j.tracker.model.Item;
 
 import java.sql.Timestamp;
 import java.util.List;
