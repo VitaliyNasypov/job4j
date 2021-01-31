@@ -16,10 +16,12 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="ru.job4j.tracker.model.Item" />
-        <mapping class="ru.job4j.tracker.model.Car" />
-        <mapping class="ru.job4j.tracker.model.Brand" />
-        <mapping class="ru.job4j.tracker.model.Model" />
-        <mapping class="ru.job4j.tracker.model.Author" />
-        <mapping class="ru.job4j.tracker.model.Book" />
+        <mapping class="ru.job4j.tracker.model.Car"/>
+        <mapping class="ru.job4j.tracker.model.Brand"/>
+        <mapping class="ru.job4j.tracker.model.Model"/>
+        <mapping class="ru.job4j.tracker.model.Author"/>
+        <mapping class="ru.job4j.tracker.model.Book"/>
+        <mapping class="ru.job4j.tracker.model.ModelAuto" />
+        <mapping class="ru.job4j.tracker.model.BrandAuto" />
     </session-factory>
 </hibernate-configuration>
