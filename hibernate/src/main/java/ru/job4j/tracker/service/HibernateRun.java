@@ -25,7 +25,7 @@ public class HibernateRun {
                     new Timestamp(1459510232000L)), sf);
             create(new Item("Learn Hibernate 2", "Description 2",
                     new Timestamp(14595102234200L)), sf);
-            create(new Item("Learn Hibernate 3", "Description 3",
+            create(new Item("Learn Hibernate 3", "DescrHbmTrackeription 3",
                     new Timestamp(1459510243242000L)), sf);
             System.out.println(item1);
             item1.setName("Learn Hibernate 5.");

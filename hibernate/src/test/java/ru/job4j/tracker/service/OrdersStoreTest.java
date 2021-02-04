@@ -42,7 +42,7 @@ public class OrdersStoreTest {
     }
 
     @Test
-    public void whenSaveOrderAndFindAllOneRowWithDescriptionTest() {
+    public void whenSaveOrderAndFindAllOneRowWithDescription() {
         OrdersStore store = new OrdersStore(pool);
         ModelOrder modelOrder = new ModelOrder();
         modelOrder.setName("name");

@@ -27,7 +27,7 @@
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
@@ -37,13 +37,6 @@
             <version>1.7.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -60,7 +53,6 @@
             <artifactId>logback-core</artifactId>
             <version>1.2.3</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -73,7 +65,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.37</version>
+                        <version>8.40</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -114,10 +106,8 @@
             </plugin>
         </plugins>
     </build>
-
     <modules>
         <module>hibernate</module>
         <module>multithreading</module>
     </modules>
-
 </project>

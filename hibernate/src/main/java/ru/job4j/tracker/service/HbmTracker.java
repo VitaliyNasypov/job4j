@@ -63,7 +63,7 @@ public class HbmTracker implements Store, AutoCloseable {
     public List<Item> findAll() {
         List<Item> result;
         try (Session session = sf.openSession()) {
-            result = session.createQuery("from ru.job4j.tracker.Item").list();
+            result = session.createQuery("from Item").list();
         }
         return result;
     }
@@ -73,7 +73,7 @@ public class HbmTracker implements Store, AutoCloseable {
         List<Item> result;
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            Query query = session.createQuery("from ru.job4j.tracker.Item where name = :key");
+            Query query = session.createQuery("from Item where name = :key");
             query.setParameter("key", key);
             result = query.getResultList();
             session.getTransaction().commit();
