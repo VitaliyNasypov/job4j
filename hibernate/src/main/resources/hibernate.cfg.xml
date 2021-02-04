@@ -21,7 +21,10 @@
         <mapping class="ru.job4j.tracker.model.Model"/>
         <mapping class="ru.job4j.tracker.model.Author"/>
         <mapping class="ru.job4j.tracker.model.Book"/>
-        <mapping class="ru.job4j.tracker.model.ModelAuto" />
-        <mapping class="ru.job4j.tracker.model.BrandAuto" />
+        <mapping class="ru.job4j.tracker.model.ModelAuto"/>
+        <mapping class="ru.job4j.tracker.model.BrandAuto"/>
+        <mapping class="ru.job4j.tracker.associations.model.CarAuto" />
+        <mapping class="ru.job4j.tracker.associations.model.Engine" />
+        <mapping class="ru.job4j.tracker.associations.model.Driver" />
     </session-factory>
 </hibernate-configuration>
