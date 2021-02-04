@@ -21,7 +21,7 @@ public class OrdersStoreTest {
     public void setUp() throws SQLException {
         pool.setDriverClassName("org.hsqldb.jdbcDriver");
         pool.setUrl("jdbc:hsqldb:mem:tests;sql.syntax_pgs=true");
-        pool.setUsername("sa");
+        pool.setUsername("test");
         pool.setPassword("");
         pool.setMaxTotal(2);
         StringBuilder builder = new StringBuilder();

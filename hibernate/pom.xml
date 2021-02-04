@@ -12,6 +12,7 @@
     <artifactId>hibernate</artifactId>
     <build>
         <plugins>
+            <!-- Liquibase -->
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
