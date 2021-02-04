@@ -12,6 +12,8 @@ public class Candidate {
     private String name;
     private int experience;
     private int salary;
+    @OneToOne
+    private JobBase jobBase;
 
     public Candidate() {
     }
@@ -54,6 +56,14 @@ public class Candidate {
         this.salary = salary;
     }
 
+    public JobBase getJobBase() {
+        return jobBase;
+    }
+
+    public void setJobBase(JobBase jobBase) {
+        this.jobBase = jobBase;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -64,11 +74,13 @@ public class Candidate {
         }
         Candidate candidate = (Candidate) o;
         return id == candidate.id && experience == candidate.experience
-                && salary == candidate.salary && Objects.equals(name, candidate.name);
+                && salary == candidate.salary
+                && Objects.equals(name, candidate.name)
+                && Objects.equals(jobBase, candidate.jobBase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, experience, salary);
+        return Objects.hash(id, name, experience, salary, jobBase);
     }
 }
