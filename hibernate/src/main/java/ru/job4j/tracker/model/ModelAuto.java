@@ -12,7 +12,7 @@ public class ModelAuto {
     private String name;
     @ManyToOne
     @JoinColumn(name = "brand_auto_id")
-    BrandAuto brandAuto;
+    private BrandAuto brandAuto;
 
     public ModelAuto() {
     }
