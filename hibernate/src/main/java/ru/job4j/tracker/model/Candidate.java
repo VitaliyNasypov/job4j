@@ -12,7 +12,7 @@ public class Candidate {
     private String name;
     private int experience;
     private int salary;
-    @OneToOne (fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private JobBase jobBase;
 
     public Candidate() {
