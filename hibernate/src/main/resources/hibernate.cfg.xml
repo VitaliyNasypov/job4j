@@ -26,5 +26,6 @@
         <mapping class="ru.job4j.tracker.associations.model.CarAuto" />
         <mapping class="ru.job4j.tracker.associations.model.Engine" />
         <mapping class="ru.job4j.tracker.associations.model.Driver" />
+        <mapping class="ru.job4j.tracker.model.Candidate"/>
     </session-factory>
 </hibernate-configuration>
