@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.tracker.model.Candidate;
+import ru.job4j.tracker.model.Item;
 
 import java.util.List;
 
@@ -31,13 +32,9 @@ public class HbmCandidateRun {
             for (Candidate candidate : candidateListAll) {
                 System.out.println(candidate.getId() + " " + candidate.getName());
             }
-            List<Candidate> candidateListId = session.createQuery("from Candidate c "
-                    + "where c.id = :id")
-                    .setParameter("id", 1)
-                    .list();
-            for (Candidate candidate : candidateListId) {
-                System.out.println(candidate.getId());
-            }
+            Candidate candidateId = session.get(Candidate.class, 1);
+            System.out.println(candidateId.getId());
+
             List<Candidate> candidateListName = session.createQuery("from Candidate c "
                     + "where c.name = :name")
                     .setParameter("name", "First")
