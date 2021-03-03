@@ -127,5 +127,6 @@
     <modules>
         <module>hibernate</module>
         <module>multithreading</module>
+        <module>spring</module>
     </modules>
 </project>

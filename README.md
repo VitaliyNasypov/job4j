@@ -5,3 +5,5 @@
 <b>Модуль multithreading </b>- учебный проект по многопоточности.
 
 <b>Модуль hibernate </b>- учебный проект по Hibernate.
+
+<b>Модуль spring </b>- учебный проект по Spring.
